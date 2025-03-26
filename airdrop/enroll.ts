@@ -1,13 +1,13 @@
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import { Program, Wallet, AnchorProvider } from "@coral-xyz/anchor";
 import { IDL, Turbin3Prereq } from "./programs/Turbin3_prereq";
-import { secret_key_arr } from "./dev-wallet.json";
+import { secret_key_arr } from "./turbin3wallet.json";
 
 const kp = Keypair.fromSecretKey(new Uint8Array(secret_key_arr))
 
 const conn = new Connection("https://api.devnet.solana.com");
 
-const github = Buffer.from("irohfanrajput", "utf8")
+const github = Buffer.from("irohanrajput", "utf8")
 
 
 const provider = new AnchorProvider(conn, new Wallet(kp), { commitment: "confirmed" })
@@ -33,5 +33,13 @@ const [enrollment_key, _bump] = PublicKey.findProgramAddressSync(enrollment_seed
             https://explorer.solana.com/tx/${txhash}?cluster=devnet`);
     } catch (e) {
         console.error(`Oops, something went wrong: ${e}`)
+    }finally{
+        const accountInfo = await conn.getAccountInfo(enrollment_key);
+if (accountInfo) {
+    console.log("Enrollment already exists with a different keypair.");
+} else {
+    console.log("Proceeding with new enrollment...");
+}
+
     }
 })();

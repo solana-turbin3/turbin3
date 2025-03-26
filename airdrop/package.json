@@ -8,7 +8,8 @@
     "airdrop": "ts-node ./airdrop.ts",
     "transfer": "ts-node ./transfer.ts",
     "enroll": "ts-node ./enroll.ts",
-    "convert": "ts-node ./convert.ts"
+    "convert": "ts-node ./convert.ts",
+    "balance": "ts-node ./check-balance.ts"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.31.0",
