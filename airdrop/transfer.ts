@@ -11,15 +11,40 @@ const conn = new Connection("https://api.devnet.solana.com");
 
 (async () => {
     try {
+        const balance = await conn.getBalance(sender.publicKey)
+
+
+
+        //creating a test transaction to calculate fees
+
+
         const transaction = new Transaction().add(
             SystemProgram.transfer({
                 fromPubkey: sender.publicKey,
                 toPubkey: to,
-                lamports: LAMPORTS_PER_SOL / 100
+                lamports: balance
             })
         )
         transaction.recentBlockhash = (await conn.getLatestBlockhash('confirmed')).blockhash;
         transaction.feePayer = sender.publicKey;
+
+
+        //calculating exact fee rate to transfer entire sol amount 
+
+        const fee = (await conn.getFeeForMessage(transaction.compileMessage(), 'confirmed')).value || 0;
+
+        //remove our transfer instruction to replace it.
+
+        transaction.instructions.pop()
+
+        //adding transaction back
+
+        transaction.add(SystemProgram.transfer({
+            fromPubkey: sender.publicKey,
+            toPubkey: to,
+            lamports: balance - fee,
+        }))
+
 
         const signnature = await sendAndConfirmTransaction(conn, transaction, [sender])
 
