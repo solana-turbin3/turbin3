@@ -27,4 +27,4 @@
 **/*.rs.bk
 
 dev-wallet.json
-turbin3-wallet.json
+turbin-wallet.json
