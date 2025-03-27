@@ -1,3 +1,5 @@
 public address: QkoTZ19eo6g2Q5qgCwzHXv2yWeZnuoXsmgPfBjovS7X
 
 airdrop_tx: QkoTZ19eo6g2Q5qgCwzHXv2yWeZnuoXsmgPfBjovS7X
+
+0.1_SOL_Transfer: [text](https://explorer.solana.com/tx/4jd7Yk3vHpx8XDK5TtuGQYvkkErnxASimQvZCzUfyB9cr7xsJBzM5NpFr4rBhB3ceHm2EfKxVwZkRPBANQ9Z2vhc?cluster=devnet)
