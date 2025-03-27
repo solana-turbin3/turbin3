@@ -1,0 +1,3 @@
+public address: QkoTZ19eo6g2Q5qgCwzHXv2yWeZnuoXsmgPfBjovS7X
+
+airdrop_tx: QkoTZ19eo6g2Q5qgCwzHXv2yWeZnuoXsmgPfBjovS7X
