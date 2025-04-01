@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use crate::programs::Turbin3_prereq::{Turbin3PrereqProgram, CompleteArgs};
+    use crate::programs::turbin3_prereq::{Turbin3PrereqProgram, CompleteArgs};
     use solana_client::rpc_client::RpcClient;
     use solana_sdk::{bs58, message::Message, signature::{read_keypair_file, Keypair, Signer}, system_program, transaction::Transaction};
     use std::io::{self, BufRead};
