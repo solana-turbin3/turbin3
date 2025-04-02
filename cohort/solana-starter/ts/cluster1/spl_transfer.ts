@@ -10,6 +10,7 @@ const commitment: Commitment = "confirmed";
 const connection = new Connection("https://api.devnet.solana.com", commitment);
 
 // Mint address
+// This is the mint address we created in the previous step, which is the address of the token(unique) we want to transfer
 const mint = new PublicKey("EaDWfj82CqKtTBZgJ2MkuzTy9vHVCzWj8TCb7tAxg1XQ");
 
 // Recipient address
@@ -20,20 +21,22 @@ const to = new PublicKey("Asjd2KVipwa7PUgwP4AhyGk5pkoXvWX2rTFS88wzTrgW");
         // Get the token account of the fromWallet address, and if it does not exist, create it
         const fromWallet = await getOrCreateAssociatedTokenAccount(connection, keypair, mint, keypair.publicKey)
 
-        // Get the token account of the toWallet address, and if it does not exist, create it
-        const toWallet = await getOrCreateAssociatedTokenAccount(
-            connection,
-            keypair,
-            mint, to
-        );
 
-        const tokens_to_transfer:number = 1200000;
+        // Get the token account of the toWallet address, and if it does not exist, create it
+        const toWallet = await getOrCreateAssociatedTokenAccount(connection, keypair, mint, to)
 
         // Transfer the new token to the "toTokenAccount" we just created
-        const transfer_txid = await transfer(connection, keypair, fromWallet.address, toWallet.address, keypair, tokens_to_transfer )
-
-        console.log(`successfully transfered ${tokens_to_transfer/1000000} tokens from ${fromWallet.address} to ${toWallet.address}`)
+        const transfer_data = await transfer(connection, keypair, fromWallet.address, toWallet.address, keypair, 12345)
+        console.log(transfer_data)
     } catch (e) {
+
+
+
         console.error(`Oops, something went wrong: ${e}`)
     }
 })();
+
+//transfer of tokens is done using Associated Token Accounts, which are accounts that hold the tokens for a specific mint
+// The transfer function will transfer the specified amount of tokens from the fromWallet to the toWallet
+// The fromWallet is the address of the wallet we want to transfer the tokens from
+// The toWallet is the address of the wallet we want to transfer the tokens to
