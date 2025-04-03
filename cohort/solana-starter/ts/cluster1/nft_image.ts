@@ -15,16 +15,20 @@ umi.use(signerIdentity(signer));
 
 (async () => {
     try {
-        //1. Load image
+        //1. Load image 
         //2. Convert image to generic file.
         //3. Upload image
 
-        // const image = ???
+        const image = await readFile("./cluster1/assets/jeff.png");
+        const genericFile = createGenericFile(image, "jeff.png", {contentType:"image/png"})
 
-        // const [myUri] = ??? 
-        // console.log("Your image URI: ", myUri);
+        const [imageUri] = await umi.uploader.upload([genericFile])
+        console.log("Your image URI: ", imageUri);
     }
-    catch(error) {
+    catch (error) {
         console.log("Oops.. Something went wrong", error);
     }
 })();
+
+
+// // https://devnet.irys.xyz/J9oxycXZFR543sD59QGHE6RpvH6WK8cEB43cysWd8o3K
